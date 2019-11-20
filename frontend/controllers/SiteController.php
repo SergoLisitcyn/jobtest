@@ -103,7 +103,6 @@ class SiteController extends Controller
 
                 foreach ($columns as $column) {
                     $colDataP = str_replace(' ','',pq($column)->text());
-                    $colDataP = (float) $colDataP;
                 }
             }
             if($i > 3){
@@ -129,7 +128,6 @@ class SiteController extends Controller
                     }
                     if($j == $profit) {
                         $colData['profit'] = str_replace(' ','',pq($column)->text());
-                        $colData['profit'] = (float) $colData['profit'];
                     }
                     $j++;
                 }
