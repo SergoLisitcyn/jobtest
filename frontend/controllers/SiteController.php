@@ -85,7 +85,12 @@ class SiteController extends Controller
                 $model->file->saveAs( $path .date('d_m_Y_h_i_s') . '-' . $model->file);
             }
         }
-        $url = $path .date('d_m_Y_h_i_s') . '-' . $model->file;
+        if(isset($path)){
+            $url = $path .date('d_m_Y_h_i_s') . '-' . $model->file;
+        } else {
+            $url = 'uploads/files/statement1.html';
+        }
+
         $file = file_get_contents($url);
         $document = phpQuery::newDocumentHTML($file);
         $documentHtml = $document->find('table tr');
