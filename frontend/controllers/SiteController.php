@@ -128,7 +128,8 @@ class SiteController extends Controller
                 }
                 if (isset($colData['date']) && isset($colData['profit'])) {
                     $data['x'][$i] = $colData['date'];
-                    $data['y'][$i] = $colDataP+$colData['profit'];
+                    $colDataP+=$colData['profit'];
+                    $data['y'][$i] = $colDataP;
                 }
                 $data[] = $colData;
             }
