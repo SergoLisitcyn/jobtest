@@ -4,7 +4,8 @@ use miloschuman\highcharts\Highcharts;
 use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
-
+//var_dump($data);
+//die;
 $this->title = 'Test Job';
 ?>
 <div class="site-index">

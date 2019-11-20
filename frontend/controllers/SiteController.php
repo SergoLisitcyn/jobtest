@@ -97,7 +97,7 @@ class SiteController extends Controller
                 $columns = $row->find('td[class="mspt"]');
 
                 foreach ($columns as $column) {
-                        $colDataP = pq($column)->text();
+                    $colDataP = str_replace(' ','',pq($column)->text());
                 }
             }
             if($i > 3){
@@ -122,7 +122,7 @@ class SiteController extends Controller
                         }
                     }
                     if($j == $profit) {
-                        $colData['profit'] = (float)pq($column)->text();
+                        $colData['profit'] = str_replace(' ','',pq($column)->text());
                     }
                     $j++;
                 }
