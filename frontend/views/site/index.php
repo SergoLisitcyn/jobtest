@@ -10,7 +10,6 @@ $this->title = 'Test Job';
 <div class="site-index">
     <div class="body-content">
         <div class="upload">
-
             <?php $form = ActiveForm::begin([
                 'options' => ['enctype' => 'multipart/form-data']
             ]);
@@ -45,10 +44,7 @@ $this->title = 'Test Job';
                     },array_values($data['y']))],
                 ]
             ]
-
         ]);
-
-
         ?>
     </div>
 </div>

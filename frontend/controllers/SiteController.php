@@ -77,7 +77,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $model = new UploadForm();
-
         if(Yii::$app->request->post())
         {
             $model->file = UploadedFile::getInstance($model, 'file');
@@ -86,14 +85,10 @@ class SiteController extends Controller
                 $model->file->saveAs( $path .date('d_m_Y_h_i_s') . '-' . $model->file);
             }
         }
-
         $url = $path .date('d_m_Y_h_i_s') . '-' . $model->file;
-
         $file = file_get_contents($url);
-
         $document = phpQuery::newDocumentHTML($file);
         $documentHtml = $document->find('table tr');
-
         $i = 0;
         $data = ['x'=>[],'y'=>[]];
         foreach ($documentHtml as $rowE) {
@@ -105,16 +100,28 @@ class SiteController extends Controller
                         $colDataP = pq($column)->text();
                 }
             }
-            if($i > 4){
+            if($i > 3){
                 $row = pq($rowE);
                 $columns = $row->find('td');
                 $j = 0;
                 $colData = [];
+                $profit = 13;
+                $type = '';
                 foreach ($columns as $column) {
                     if($j == 1) {
                         $colData['date'] = pq($column)->text();
                     }
-                    if($j == 13) {
+                    if($type == ''){
+                        if($j == 2){
+                            $type = pq($column)->text();
+                            if($type == 'balance'){
+                                $profit = 4;
+                            } elseif($type == 'buy stop'){
+                                continue 2;
+                            }
+                        }
+                    }
+                    if($j == $profit) {
                         $colData['profit'] = pq($column)->text();
                     }
                     $j++;
@@ -133,7 +140,6 @@ class SiteController extends Controller
             'data'=>$data,
         ]);
     }
-
 
     /**
      * Logs in a user.
