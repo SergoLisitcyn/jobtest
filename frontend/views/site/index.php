@@ -33,9 +33,8 @@ $this->title = 'Test Job';
             'options' => [
                 'title' => ['text' => 'RoboForex (CY) Ltd.'],
                 'xAxis' => [
-                    'categories' => array_map(function($val){
-                    return (float) $val;
-                    },array_values($data['x']))
+                    'type' => 'datetime',
+                    'categories' => $data['x']
                 ],
                 'yAxis' => [
                     'title' => ['text' => 'Profit']
