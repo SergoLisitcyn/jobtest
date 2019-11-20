@@ -41,7 +41,7 @@ $this->title = 'Test Job';
                 ],
                 'series' => [
                     ['name' => 'Баланс', 'data' => array_map(function($val){
-                        return (float)$val;
+                        return (double)$val;
                     },array_values($data['y']))],
                 ]
             ]
