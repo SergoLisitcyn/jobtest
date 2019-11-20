@@ -4,8 +4,6 @@ use miloschuman\highcharts\Highcharts;
 use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
-//var_dump($data);
-//die;
 $this->title = 'Test Job';
 ?>
 <div class="site-index">
@@ -29,23 +27,23 @@ $this->title = 'Test Job';
             <?php ActiveForm::end(); ?>
         </div>
         <?php
-        echo Highcharts::widget([
-            'options' => [
-                'title' => ['text' => 'RoboForex (CY) Ltd.'],
-                'xAxis' => [
-                    'type' => 'datetime',
-                    'categories' => $data['x']
-                ],
-                'yAxis' => [
-                    'title' => ['text' => 'Profit']
-                ],
-                'series' => [
-                    ['name' => 'Баланс', 'data' => array_map(function($val){
-                        return round($val,2);
-                    },array_values($data['y']))],
+            echo Highcharts::widget([
+                'options' => [
+                    'title' => ['text' => 'RoboForex (CY) Ltd.'],
+                    'xAxis' => [
+                        'type' => 'datetime',
+                        'categories' => $data['x']
+                    ],
+                    'yAxis' => [
+                        'title' => ['text' => 'Profit']
+                    ],
+                    'series' => [
+                        ['name' => 'Баланс', 'data' => array_map(function($val){
+                            return round($val,2);
+                        },array_values($data['y']))],
+                    ]
                 ]
-            ]
-        ]);
+            ]);
         ?>
     </div>
 </div>

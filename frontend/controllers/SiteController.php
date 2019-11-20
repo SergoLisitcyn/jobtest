@@ -85,6 +85,7 @@ class SiteController extends Controller
                 $model->file->saveAs( $path .date('d_m_Y_h_i_s') . '-' . $model->file);
             }
         }
+//        проверка загружен ли файл
         if(isset($path)){
             $url = $path .date('d_m_Y_h_i_s') . '-' . $model->file;
         } else {
@@ -92,6 +93,7 @@ class SiteController extends Controller
         }
 
         $file = file_get_contents($url);
+//        парсим html file
         $document = phpQuery::newDocumentHTML($file);
         $documentHtml = $document->find('table tr');
         $i = 0;
@@ -116,6 +118,7 @@ class SiteController extends Controller
                     if($j == 1) {
                         $colData['date'] = pq($column)->text();
                     }
+//                    тип данных в таблице
                     if($type == ''){
                         if($j == 2){
                             $type = pq($column)->text();
@@ -128,7 +131,6 @@ class SiteController extends Controller
                     }
                     if($j == $profit) {
                         $colData['profit'] = str_replace(' ','',pq($column)->text());
-
                     }
                     $j++;
                 }
