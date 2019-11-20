@@ -122,7 +122,7 @@ class SiteController extends Controller
                         }
                     }
                     if($j == $profit) {
-                        $colData['profit'] = pq($column)->text();
+                        $colData['profit'] = (float)pq($column)->text();
                     }
                     $j++;
                 }
