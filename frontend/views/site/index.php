@@ -9,7 +9,7 @@ $this->title = 'Test Job';
 ?>
 <div class="site-index">
     <div class="body-content">
-        <div class="upload" style="width:50%">
+        <div class="upload">
 
             <?php $form = ActiveForm::begin([
                 'options' => ['enctype' => 'multipart/form-data']
