@@ -99,10 +99,31 @@ class SiteController extends Controller
         $i = 0;
         $data = ['x'=>[],'y'=>[]];
         foreach ($documentHtml as $rowE) {
+            $j = 0;
+            if($i == 2){
+                $row = pq($rowE);
+                $columns = $row->find('td');
+                foreach ($columns as $column) {
+                        if($j == 1){
+                            $structure = pq($column)->text();
+                            if($structure != 'Open Time') {
+                                Yii::$app->session->setFlash('error', 'Некорректная структура файла');
+                                continue 2;
+                            }
+                        }
+                        if($j == 13){
+                            $structure = pq($column)->text();
+                            if($structure != 'Profit') {
+                                Yii::$app->session->setFlash('error', 'Некорректная структура файла');
+                                continue 2;
+                            }
+                        }
+                    $j++;
+                }
+            }
             if($i == 3){
                 $row = pq($rowE);
                 $columns = $row->find('td[class="mspt"]');
-
                 foreach ($columns as $column) {
                     $colDataP = str_replace(' ','',pq($column)->text());
                 }
@@ -135,9 +156,13 @@ class SiteController extends Controller
                     $j++;
                 }
                 if (isset($colData['date']) && isset($colData['profit'])) {
-                    $data['x'][$i] = $colData['date'];
-                    $colDataP+=$colData['profit'];
-                    $data['y'][$i] = $colDataP;
+                    if(isset($colDataP)){
+                        $data['x'][$i] = $colData['date'];
+                        $colDataP+=$colData['profit'];
+                        $data['y'][$i] = $colDataP;
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Некорректная структура файла');
+                    }
                 }
                 $data[] = $colData;
             }

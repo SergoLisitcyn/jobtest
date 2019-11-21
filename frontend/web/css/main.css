@@ -122,3 +122,8 @@ a.desc:after {
 .upload {
     width: 50%;
 }
+
+.alert-danger {
+    width: 50% !important;
+    padding: 10px !important;
+}
