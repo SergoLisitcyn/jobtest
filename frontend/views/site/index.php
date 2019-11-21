@@ -27,23 +27,27 @@ $this->title = 'Test Job';
             <?php ActiveForm::end(); ?>
         </div>
         <?php
-            echo Highcharts::widget([
-                'options' => [
-                    'title' => ['text' => 'RoboForex (CY) Ltd.'],
-                    'xAxis' => [
-                        'type' => 'datetime',
-                        'categories' => $data['x']
-                    ],
-                    'yAxis' => [
-                        'title' => ['text' => 'Profit']
-                    ],
-                    'series' => [
-                        ['name' => 'Баланс', 'data' => array_map(function($val){
-                            return round($val,2);
-                        },array_values($data['y']))],
-                    ]
-                ]
-            ]);
+         if(!empty($data['x']) && !empty($data['y'])){
+             echo Highcharts::widget([
+                 'options' => [
+                     'title' => ['text' => 'RoboForex (CY) Ltd.'],
+                     'xAxis' => [
+                         'type' => 'datetime',
+                         'categories' => $data['x']
+                     ],
+                     'yAxis' => [
+                         'title' => ['text' => 'Profit']
+                     ],
+                     'series' => [
+                         ['name' => 'Баланс', 'data' => array_map(function($val){
+                             return round($val,2);
+                         },array_values($data['y']))],
+                     ]
+                 ]
+             ]);
+         } else {
+             Yii::$app->session->setFlash('error', 'Некорректная структура файла');
+         }
         ?>
     </div>
 </div>
