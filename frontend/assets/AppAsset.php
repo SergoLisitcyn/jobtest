@@ -16,10 +16,13 @@ class AppAsset extends AssetBundle
         'css/main.css',
     ];
     public $js = [
+        'js/test.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapPluginAsset',
+
     ];
     public $publishOptions = [
         'forceCopy' => true,
